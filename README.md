@@ -8,6 +8,8 @@ The tracker reads replay files without modifying World of Tanks, installing a mo
 
 No Python installation is needed when using a packaged executable. If you have built the project, it is located at `dist\WoT Battle Tracker.exe`; the source checkout does not include this generated file.
 
+**Don't have the `.exe` yet?** Follow [Build the executable](#build-the-executable) below for the complete Windows build commands.
+
 1. Open `WoT Battle Tracker.exe`.
 2. Confirm the **Replay directory**, or select it with **Browse…**. The tracker checks common game installation locations; select the game's `replays` folder manually if detection fails.
 3. Confirm the **CSV destination**. The default is `%LOCALAPPDATA%\WoT Battle Tracker\battles.csv`.
@@ -76,14 +78,25 @@ In the game settings, enable replay recording for **all battles**. The tracker i
 
 ## Build the executable
 
-After installing the source dependencies above, install PyInstaller and build using the virtual environment:
+Build on Windows with Python 3.11+ (including Tkinter and pip) installed and the `python` command available in PowerShell. Open PowerShell in the project folder containing `launcher.py`. If you have just cloned the repository, enter that folder with `cd wot-tracker` first.
+
+Run these commands in order; they include all runtime and build dependencies, so you do not need to follow the separate run-from-source instructions:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install pyinstaller
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install psycopg2-binary pywin32 pyinstaller
 .\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean --onefile --windowed --name "WoT Battle Tracker" launcher.py
 ```
 
-The packaged app is written to `dist\WoT Battle Tracker.exe`.
+After the build finishes successfully, launch the executable:
+
+```powershell
+& ".\dist\WoT Battle Tracker.exe"
+```
+
+The packaged app is written to `dist\WoT Battle Tracker.exe`. You can copy this executable to another Windows computer without installing Python there. PostgreSQL storage still requires a separately configured database server.
+
+The `.venv`, `build`, and `dist` folders are generated locally and excluded from Git. To distribute the executable on GitHub, attach it to a release.
 
 Alternatively, run `.\build.ps1` with an environment where `python` has the runtime dependencies and PyInstaller installed.
 
