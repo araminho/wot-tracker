@@ -1,0 +1,42 @@
+# Python bytecode and tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local Python environments
+.venv/
+venv/
+env/
+
+# Packaging output (keep PyInstaller .spec build configurations)
+/build/
+/dist/
+*.egg-info/
+
+# Local battle data and diagnostic output
+*.wotreplay
+*.csv
+*.wot-index.json
+*.wot-index.tmp
+*.log
+*.log.*
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+/settings.json
+/postgres-password.dat
+/postgres-password.tmp
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
